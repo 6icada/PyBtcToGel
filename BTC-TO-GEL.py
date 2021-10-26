@@ -5,14 +5,15 @@
 import requests
 import os
 from bs4 import BeautifulSoup
-from requests.api import request
 
 # GET request to site to get html script
 responseGEL = requests.get('https://valuta.exchange/ka/btc-to-gel?amount=1')
 responseUSD = requests.get('https://valuta.exchange/ka/btc-to-usd?amount=1')
+responseRUB = requests.get('https://valuta.exchange/ka/btc-to-rub?amount=1')
 
 print('1) GEL')
 print('2) USD')
+print('3) RUB')
 # userInput to choose what currency he/she wants
 userInput = input('Enter what currency you want: ')
 
@@ -52,4 +53,21 @@ elif userInput == 2 or userInput == '2':
     span = parent.find('span')
 
     # Printing result
-    print(f'BTC to USD price is: {span.string} Lari')
+    print(f'BTC to USD price is: {span.string} Dollar')
+elif userInput == 3 or userInput == '3':
+    # Opening(Making) file to paste html script
+    f = open('responseRUB.html', 'w')
+    f.write(f'{responseRUB.text}')
+    f.close()
+
+    # Reading html file with BeautifulSoup
+    with open('responseRUB.html', 'r') as f:
+        document = BeautifulSoup(f, 'html.parser')
+    
+    # Making vars
+    tag = document.find_all(text='RUB')
+    parent = tag[0].parent
+    span = parent.find('span')
+
+    # Printing result
+    print(f'BTC to RUB price is: {span.string} Ruble')
