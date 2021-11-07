@@ -54,6 +54,9 @@ elif userInput == 2 or userInput == '2':
 
     # Printing result
     print(f'BTC to USD price is: {span.string} Dollar')
+
+    # Removing html file
+    os.system('rm -f responseUSD.html > /dev/null')
 elif userInput == 3 or userInput == '3':
     # Opening(Making) file to paste html script
     f = open('responseRUB.html', 'w')
@@ -71,3 +74,6 @@ elif userInput == 3 or userInput == '3':
 
     # Printing result
     print(f'BTC to RUB price is: {span.string} Ruble')
+
+    # Removing html file
+    os.system('rm -f responseRUB.html 2&1> /dev/null')
